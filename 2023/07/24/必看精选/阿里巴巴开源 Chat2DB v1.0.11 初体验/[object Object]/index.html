@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库连接工具阿里巴巴开源 Chat2DB v1.0.11 初体验 | 阜山的博客</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/avatar.gif">
+<link rel="apple-touch-icon" href="/img/avatar.gif">
+<meta name="apple-mobile-web-app-title" content="阜山的博客">
+<link rel="bookmark" href="/img/avatar.gif">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/avatar.gif">
+<meta name="description" content="">
+<meta name="theme-color" content="#f7f9fe">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2021-12-12 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":false,"limit":200},"lightbox":true,"randomlinks":true,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true,"comment":{"enable":true,"twikooUrl":"https://fsvip.gitee.io/"},"localsearch":{"preload":false,"path":"/search.xml"}};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    
+        <div class="console-card-group">
+            <div class="console-card-group-left">
+                <div class="console-card" id="card-newest-comments" onclick="acrylic.hideConsole()">
+                    <div class="card-content">
+                        <div class="author-content-item-tips">互动</div>
+                        <div class="author-content-item-title">最新评论</div>
+                    </div>
+                    <div class="aside-list"></div>
+                </div>
+    
+            </div>
+            <div class="console-card-group-right">
+                <div class="console-card tags" onclick="acrylic.hideConsole()">
+                    <div class="card-content">
+                        <div class="author-content-item-tips">标签</div>
+                        <div class="author-content-item-title">寻找感兴趣的领域</div>
+                    </div>
+                    <div class="card-tag-cloud">
+                        
+                            <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 0.8rem; color: #d3d3d3">教程<sup>13</sup></a>
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 0.8rem; color: #d3d3d3">笔记<sup>11</sup></a>
+                        
+                            <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="font-size: 0.8rem; color: #d3d3d3">个人<sup>1</sup></a>
+                        
+                            <a href="/tags/%E7%A0%B4%E8%A7%A3/" style="font-size: 0.8rem; color: #d3d3d3">破解<sup>1</sup></a>
+                        
+                            <a href="/tags/Maven/" style="font-size: 0.8rem; color: #d3d3d3">Maven<sup>1</sup></a>
+                        
+                            <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 0.8rem; color: #d3d3d3">设计<sup>1</sup></a>
+                        
+                            <a href="/tags/%E7%83%AD%E9%97%A8/" style="font-size: 0.8rem; color: #d3d3d3">热门<sup>1</sup></a>
+                        
+                            <a href="/tags/%E4%BD%BF%E7%94%A8/" style="font-size: 0.8rem; color: #d3d3d3">使用<sup>1</sup></a>
+                        
+                            <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 0.8rem; color: #d3d3d3">随笔<sup>1</sup></a>
+                        
+                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 0.8rem; color: #d3d3d3">日常<sup>1</sup></a>
+                        
+                            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 0.8rem; color: #d3d3d3">面试题<sup>1</sup></a>
+                        
+                            <a href="/tags/RSA%E5%8A%A0%E8%A7%A3%E5%AF%86/" style="font-size: 0.8rem; color: #d3d3d3">RSA加解密<sup>1</sup></a>
+                        
+                            <a href="/tags/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/" style="font-size: 0.8rem; color: #d3d3d3">必看精选<sup>1</sup></a>
+                        
+                    </div>
+                </div>
+                <div class="console-card history" onclick="acrylic.hideConsole()">
+                    <ul class="card-archive-list">
+    
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2023-09/')" data-pjax-state=""><span
+            class="card-archive-list-date">2023-09</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2023-08/')" data-pjax-state=""><span
+            class="card-archive-list-date">2023-08</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2023-07/')" data-pjax-state=""><span
+            class="card-archive-list-date">2023-07</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2022-05/')" data-pjax-state=""><span
+            class="card-archive-list-date">2022-05</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2021-07/')" data-pjax-state=""><span
+            class="card-archive-list-date">2021-07</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2020-07/')" data-pjax-state=""><span
+            class="card-archive-list-date">2020-07</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2019-10/')" data-pjax-state=""><span
+            class="card-archive-list-date">2019-10</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+        
+</ul>
+
+                </div>
+            </div>
+        </div>
+    
+    
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+                    
+            <div class="console-btn-item" id="consoleMusic" onclick="acrylic.musicToggle()" title="音乐开关"><a class="music-switch"><i class="fas fa-music"></i></a></div>
+        
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style=""></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/avatar.gif" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+            
+            <a class="back-menu-item" href="http://fsvip.gitee.io/plog/" rel="external nofollow" title="相册博客">
+              <img class="back-menu-item-icon" src="/img/g.png" loading="lazy">
+              <span class="back-menu-item-text">
+                相册博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 友链</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/album/">
+                                <i class="fas fa-fish-fins"></i>
+                                <span> 友链相册</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/links/">
+                                <i class="fas fa-user-group"></i>
+                                <span> 友情链接</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="javascript:travelling()">
+                                <i class="fas fa-bus"></i>
+                                <span> 随机博主</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/says" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/about" rel="external nofollow">
+                    <span> 我的</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1em; color: #d3d3d3">教程
+                        <sup>13</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1em; color: #d3d3d3">笔记
+                        <sup>11</sup>
+                    </a>
+                
+                    <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="font-size: 1em; color: #d3d3d3">个人
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%A0%B4%E8%A7%A3/" style="font-size: 1em; color: #d3d3d3">破解
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/Maven/" style="font-size: 1em; color: #d3d3d3">Maven
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 1em; color: #d3d3d3">设计
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%83%AD%E9%97%A8/" style="font-size: 1em; color: #d3d3d3">热门
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E4%BD%BF%E7%94%A8/" style="font-size: 1em; color: #d3d3d3">使用
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1em; color: #d3d3d3">随笔
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 1em; color: #d3d3d3">日常
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1em; color: #d3d3d3">面试题
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/RSA%E5%8A%A0%E8%A7%A3%E5%AF%86/" style="font-size: 1em; color: #d3d3d3">RSA加解密
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/" style="font-size: 1em; color: #d3d3d3">必看精选
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/avatar.gif" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+            
+            <a class="back-menu-item" href="http://fsvip.gitee.io/plog/" rel="external nofollow" title="相册博客">
+              <img class="back-menu-item-icon" src="/img/g.png" loading="lazy">
+              <span class="back-menu-item-text">
+                相册博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Alan</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">数据库连接工具阿里巴巴开源 Chat2DB v1.0.11 初体验</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 友链</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/album/">
+                                <i class="fas fa-fish-fins"></i>
+                                <span> 友链相册</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/links/">
+                                <i class="fas fa-user-group"></i>
+                                <span> 友情链接</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="javascript:travelling()">
+                                <i class="fas fa-bus"></i>
+                                <span> 随机博主</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/says" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/about" rel="external nofollow">
+                    <span> 我的</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="search-button">
+        <a class="site-page social-icon search" title="站内搜索"
+            href="javascript:void(0);" rel="external nofollow">
+            <i class="fas fa-magnifying-glass" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="https://i2.hdslb.com/bfs/archive/3243ea86d645c1381a8895e9ecb8a0d2c4da2da4.jpg" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            
+            <span class="post-meta-categories">
+                
+                    <a class="post-meta-categories" href="/categories/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/">必看精选</a>
+                
+            </span>
+            
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/%E7%83%AD%E9%97%A8/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">热门</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">数据库连接工具阿里巴巴开源 Chat2DB v1.0.11 初体验</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-07-24T13:14:54+08:00"></time>
+            </span>
+            
+                <span class="post-meta-date" title="更新于">
+                    <i class="post-meta-icon fa-solid fa-clock-rotate-left"></i>
+                    <time datetime="2023-09-16T12:19:09+08:00"></time>
+                </span>
+            
+            
+                <span class="post-meta-position" title="作者IP归属地为河南">
+                    <i class="fas fa-location-dot post-meta-icon"></i>
+                    <span>河南</span>
+                </span>
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">1.4k</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>6 min</span>
+                    </span>
+                
+            
+            
+            
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <div class="sticky_layout mobile-mulu">
+            
+                <div class="card-widget" id="card-toc1">
+    <div class="item-headline mulu1">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content mulu2">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Chat2DB"><span class="toc-number">1.</span> <span class="toc-text">什么是 Chat2DB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">配置数据源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">准备测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%87%A0%E4%B8%AA%E5%8A%9F%E8%83%BD%E8%8F%9C%E5%8D%95"><span class="toc-number">6.</span> <span class="toc-text">认识几个功能菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%AC-SQL"><span class="toc-number">7.</span> <span class="toc-text">自然语言转 SQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-%E8%A7%A3%E9%87%8A"><span class="toc-number">8.</span> <span class="toc-text">SQL 解释</span></a></li></ol>
+    </div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script>
+        if (utils.isMobile()){
+            document.querySelector('.mulu2').style.display = 'block';
+        }else{
+            document.querySelector('.mulu2').remove();
+        }
+    </script>
+</div>
+<style>
+    .mulu1{
+        margin-top: 1rem;
+        margin-left: 0.6rem;
+        font-weight: bold;
+    }
+    .mulu2{
+        margin-left: -1.5rem;
+        margin-top: -0.7rem;
+        opacity: 0.6;
+        filter: blur(0.6px);
+    }
+</style>
+            
+        </div>
+        <script type="text/javascript" src="/js/utils.js"></script>
+        <script>
+            if (utils.isMobile()){
+                document.querySelector('.mobile-mulu').style.display = 'block';
+            }else{
+                document.querySelector('.mobile-mulu').style.display = 'none';
+            }
+        </script>
+        <article class="post-content" id="article-container">
+            <blockquote>
+<p>作为一名阿里巴巴开源项目的拥护者，从 Chat2DB 开源至今都有关注这个开源项目。因为之前的版本还存在较多 Bug，暂时就没有分享。目前升级到 v1.0.11 版本后，我来谈谈我个人的一个使用感受。</p>
+</blockquote>
+<h3 id="什么是-Chat2DB"><a href="#什么是-Chat2DB" class="headerlink" title="什么是 Chat2DB"></a>什么是 Chat2DB</h3><p>Chat2DB 是一款有开源免费的多数据库客户端工具，支持 Windows、MAC 本地安装，也支持服务器端部署，Web 网页访问。和传统的数据库客户端软件Navicat、DBeaver 相比 Chat2DB 集成了 AIGC 的能力，能够将自然语言转换为 SQL，也可以将 SQL 转换为自然语言，可以给出研发人员 SQL 的优化建议，极大地提升人员的效率，是 AI 时代数据库研发人员的利器。未来即使不懂SQL的运营业务也可以使用快速查询业务数据、生成报表能力。</p>
+<h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><p>项目 Releases 地址：<br><a target="_blank" rel="noopener" href="https://github.com/alibaba/Chat2DB/releases">https://github.com/alibaba/Chat2DB/releases</a></p>
+<p>大家根据自己的电脑环境选择对应版本即可，博主这里使用的 MacOS X64（Intel芯片）版本。</p>
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><p>正常双击打开拖动到 Applications 进行安装，安装完成后配置 Chat2DB AI SQL 功能。找到设置，填写 Open AI 的密钥（登录 OpenAI 官网，右上角View API keys 创建即可）。</p>
+<p><img src="https://pics3.baidu.com/feed/730e0cf3d7ca7bcbfd0d1463bc70086ff724a88a.jpeg@f_auto?token=8396a5a372dc3e7b107e89c83aaf590a"></p>
+<p>创建完成后，在设置中输入刚刚获取的 OpenAI 密钥。<br><img src="https://pics1.baidu.com/feed/7acb0a46f21fbe0939ce501481186f3f8644ada7.jpeg@f_auto?token=25dee4efcbaf357f85d15a807e4558f5"><br>至此，我们已经完成了基础的配置，下面我们来感受一下 Chat2DB。<br>Chat2DB 初体验</p>
+<h3 id="配置数据源"><a href="#配置数据源" class="headerlink" title="配置数据源"></a>配置数据源</h3><p>这里以 MySQL 为例，点击加号（+）新建数据源。<br><img src="https://pics6.baidu.com/feed/b3fb43166d224f4ad2febdc5e08ff35e9922d103.jpeg@f_auto?token=0575a845550dc5f3a99049d616ee1bde"></p>
+<p>填写相关链接信息，选择数据库，这里 test 为例：<br><img src="https://pics2.baidu.com/feed/c8177f3e6709c93d3ffc19b575459bd0d00054ee.jpeg@f_auto?token=8bfe9b8074e17bac3373ff55b41989a5"><br>目前 MAC 版本选择了数据库 test，但是实际上依旧还是将整个 localhost 的所有数据库列出来了。这是个已知 Bug，博主也提交了 Issue，建议官方不选择数据库默认所有，指定了数据库就单独显示某个库。</p>
+<h3 id="准备测试数据"><a href="#准备测试数据" class="headerlink" title="准备测试数据"></a>准备测试数据</h3><p>这里博主准备了一份测试数据表，分别是：科目表、学生成绩表、学生信息表、学生选修科目表，大家可以复制执行即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> NAMES utf8mb4;<span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">0</span>;<span class="comment">-- ------------------------------ Table structure for course-- ----------------------------DROP TABLE IF EXISTS `course`;CREATE TABLE `course` (  `id` int NOT NULL AUTO_INCREMENT COMMENT &#x27;科目ID&#x27;,  `name` varchar(50) NOT NULL COMMENT &#x27;科目名称&#x27;,  `teacher` varchar(50) NOT NULL COMMENT &#x27;授课教师&#x27;,  `credit` int NOT NULL COMMENT &#x27;科目学分&#x27;,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT=&#x27;科目表&#x27;;-- ------------------------------ Records of course-- ----------------------------BEGIN;INSERT INTO `course` VALUES (1, &#x27;语文&#x27;, &#x27;张老师&#x27;, 100);INSERT INTO `course` VALUES (2, &#x27;数学&#x27;, &#x27;王老师&#x27;, 100);COMMIT;-- ------------------------------ Table structure for score-- ----------------------------DROP TABLE IF EXISTS `score`;CREATE TABLE `score` (  `id` int NOT NULL AUTO_INCREMENT COMMENT &#x27;成绩ID&#x27;,  `student_id` int NOT NULL COMMENT &#x27;学生ID&#x27;,  `course_id` int NOT NULL COMMENT &#x27;科目ID&#x27;,  `score` int NOT NULL COMMENT &#x27;成绩&#x27;,  PRIMARY KEY (`id`),  KEY `student_id` (`student_id`),  KEY `course_id` (`course_id`),  CONSTRAINT `score_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),  CONSTRAINT `score_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT=&#x27;学生成绩表&#x27;;-- ------------------------------ Records of score-- ----------------------------BEGIN;INSERT INTO `score` VALUES (1, 1, 1, 90);INSERT INTO `score` VALUES (2, 1, 2, 95);INSERT INTO `score` VALUES (3, 2, 1, 100);INSERT INTO `score` VALUES (4, 2, 2, 99);COMMIT;-- ------------------------------ Table structure for student-- ----------------------------DROP TABLE IF EXISTS `student`;CREATE TABLE `student` (  `id` int NOT NULL AUTO_INCREMENT COMMENT &#x27;学生ID&#x27;,  `name` varchar(50) NOT NULL COMMENT &#x27;学生姓名&#x27;,  `gender` varchar(10) NOT NULL COMMENT &#x27;学生性别&#x27;,  `birthday` date NOT NULL COMMENT &#x27;学生生日&#x27;,  `address` varchar(100) NOT NULL COMMENT &#x27;学生住址&#x27;,  `phone` varchar(20) NOT NULL COMMENT &#x27;学生联系方式&#x27;,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT=&#x27;学生信息表&#x27;;-- ------------------------------ Records of student-- ----------------------------BEGIN;INSERT INTO `student` VALUES (1, &#x27;小明&#x27;, &#x27;男&#x27;, &#x27;2023-06-16&#x27;, &#x27;广州&#x27;, &#x27;13724889158&#x27;);INSERT INTO `student` VALUES (2, &#x27;小羊&#x27;, &#x27;女&#x27;, &#x27;2023-06-16&#x27;, &#x27;广州&#x27;, &#x27;13800126000&#x27;);COMMIT;-- ------------------------------ Table structure for student_course-- ----------------------------DROP TABLE IF EXISTS `student_course`;CREATE TABLE `student_course` (  `id` int NOT NULL AUTO_INCREMENT COMMENT &#x27;关系ID&#x27;,  `student_id` int NOT NULL COMMENT &#x27;学生ID&#x27;,  `course_id` int NOT NULL COMMENT &#x27;科目ID&#x27;,  PRIMARY KEY (`id`),  KEY `student_id` (`student_id`),  KEY `course_id` (`course_id`),  CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),  CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`)) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT=&#x27;学生选修科目表&#x27;;-- ------------------------------ Records of student_course-- ----------------------------BEGIN;INSERT INTO `student_course` VALUES (1, 1, 1);INSERT INTO `student_course` VALUES (2, 1, 2);INSERT INTO `student_course` VALUES (3, 2, 1);INSERT INTO `student_course` VALUES (4, 2, 2);COMMIT;SET FOREIGN_KEY_CHECKS = 1;</span></span><br></pre></td></tr></table></figure>
+<h3 id="认识几个功能菜单"><a href="#认识几个功能菜单" class="headerlink" title="认识几个功能菜单"></a>认识几个功能菜单</h3><p>当你选择好对应的数据库表后，你会发现有这么 4 个菜单：<br><img src="https://pics2.baidu.com/feed/242dd42a2834349bc00a1ec7209276c237d3beed.jpeg@f_auto?token=69ceef76c6f5192e8917df6e2e0e011b"></p>
+<p>自然语言转 SQL：简单来说就是 使用中文描述，软件自动帮我们生成 SQL；<br>SQL 解释：SQL 语句转中文解释（有的时候我们会遇到非常复杂的 SQL，有的甚至成百上千行的SQL，要读懂这段 SQL 语句可能需要几个小时甚至几天时间。 通过 Chat2DB就可以快速了解这段 SQL 的含义）<br>有的时候我们写了一段 SQL 性能不好，Chat2DB 也可以帮我们优化 SQL，提升查询性能<br>不同数据库 SQL 语法有略微的差异，也可以通过 Chat2DB 让它帮我们去转换这个 SQL 的语法（比如 MySQL 转 SQLServer 语句）<br>开始测试</p>
+<h3 id="自然语言转-SQL"><a href="#自然语言转-SQL" class="headerlink" title="自然语言转 SQL"></a>自然语言转 SQL</h3><p>终端输入查询学生小明的各科目成绩，包括科目名称、教师名字段，点击自然语言转 SQL。<br>在弹出的选择表中选择本次查询所涉及到的几个表：course、score、student。<br>最终生成如下：<br><img src="https://pics2.baidu.com/feed/9e3df8dcd100baa11780ec42ae68da1ec9fc2e24.jpeg@f_auto?token=f5203d0f4b5c5c2cbce04f771973b29d"></p>
+<h3 id="SQL-解释"><a href="#SQL-解释" class="headerlink" title="SQL 解释"></a>SQL 解释</h3><p>那么，我们使用这段生成的 SQL 语句反过来看看 Chat2DB 会帮我们解释成什么。选中生成的 SQL 点击 SQL 解释，输出如下：<br><img src="https://pics7.baidu.com/feed/9358d109b3de9c824ae30c5f85f9e3061bd843e5.jpeg@f_auto?token=60029aa0a171cf4cd01d12ed70ea30ee"></p>
+
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                    <div class="post-reward">
+    <div class="reward-button button--animated" title="赞赏作者">
+        <script>
+            if (utils.isMobile()) { const showReward=()=> {
+                const rewardMain = document.querySelector('.reward-main');
+                rewardMain.style.display = 'flex';
+                document.addEventListener('touchstart', hideReward);
+                };
+                const hideReward = () => {
+                const rewardMain = document.querySelector('.reward-main');
+                rewardMain.style.display = 'none';
+                document.removeEventListener('touchstart', hideReward);
+                };
+                const rewardButton = document.querySelector('.reward-button');
+                rewardButton.addEventListener('touchstart', event => {
+                event.stopPropagation();
+                showReward();
+                });
+                }
+          </script>
+        <i class="fas fa-hamburger"></i>
+        打赏作者
+    </div>
+    <div class="reward-main">
+        <ul class="reward-all">
+            <span class="reward-title">感谢你赐予我前进的力量</span>
+            <ul class="reward-group">
+                
+                
+            </ul>
+            <a class="reward-main-btn" href="/null">
+                <div class="reward-text">赞赏者名单</div>
+                <div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div>
+            </a>
+        </ul>
+    </div>
+</div>
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://fsvip.gitee.io/2023/07/24/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%20Chat2DB%20v1.0.11%20%E5%88%9D%E4%BD%93%E9%AA%8C/[object%20Object]/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://fsvip.gitee.io/2023/07/24/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%20Chat2DB%20v1.0.11%20%E5%88%9D%E4%BD%93%E9%AA%8C/[object%20Object]/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=数据库连接工具阿里巴巴开源 Chat2DB v1.0.11 初体验&amp;url=https://fsvip.gitee.io/2023/07/24/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%20Chat2DB%20v1.0.11%20%E5%88%9D%E4%BD%93%E9%AA%8C/[object%20Object]/&amp;pic=https://i2.hdslb.com/bfs/archive/3243ea86d645c1381a8895e9ecb8a0d2c4da2da4.jpg"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/%E7%83%AD%E9%97%A8/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                热门
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>数据库连接工具阿里巴巴开源 Chat2DB v1.0.11 初体验</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/2023/07/24/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%20Chat2DB%20v1.0.11%20%E5%88%9D%E4%BD%93%E9%AA%8C/%5Bobject%20Object%5D/">https://fsvip.gitee.io/2023/07/24/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%20Chat2DB%20v1.0.11%20%E5%88%9D%E4%BD%93%E9%AA%8C/[object%20Object]/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">阜山的博客</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        <div class="prev-post pull-left">
+            <a href="/2023/08/17/linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/%5Bobject%20Object%5D/">
+                <div class="pagination-info">
+                    <div class="label">上一篇</div>
+                    <div class="prev_info">Linux常用命令</div>
+                </div>
+            </a>
+        </div>
+        <div class="next-post pull-right">
+            <a href="/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/SpringBoot%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/%5Bobject%20Object%5D/">
+                <div class="pagination-info">
+                    <div class="label">下一篇</div>
+                    <div class="next_info">SpringBoot调用http请求的6种方式</div>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://fsvip.gitee.io/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                hnyufushan
+            </div>
+            <div class="author-info__description">这有关于<b>开发</b>、<b>技术</b>相关的问题和看法，还有对于动漫的一些<b>杂评</b>。<br>相信你可以在这里找到对你有用的知识和教程。</div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/hexo-theme-Acrylic/Hexo-Theme-Acrylic-Next" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:a@nalex.top" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Chat2DB"><span class="toc-text">什么是 Chat2DB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-text">配置数据源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE"><span class="toc-text">准备测试数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86%E5%87%A0%E4%B8%AA%E5%8A%9F%E8%83%BD%E8%8F%9C%E5%8D%95"><span class="toc-text">认识几个功能菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E8%BD%AC-SQL"><span class="toc-text">自然语言转 SQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-%E8%A7%A3%E9%87%8A"><span class="toc-text">SQL 解释</span></a></li></ol>
+    </div>
+</div>
+        
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/09/16/git/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/%5Bobject%20Object%5D/" title="git使用方法">
+                    <img
+                        alt="git使用方法"
+                        src="https://img1.baidu.com/it/u=3008342669,3745410925&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=667&amp;h=500">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/09/16/git/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/09/16/git/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/%5Bobject%20Object%5D/" title="git使用方法">
+                        git使用方法
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/09/16/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/Java%E7%AC%94%E8%AF%95%E6%98%93%E9%94%99%E7%82%B9%E8%AE%B0%E5%BD%95/%5Bobject%20Object%5D/" title="Java笔试易错点记录">
+                    <img
+                        alt="Java笔试易错点记录"
+                        src="https://img0.baidu.com/it/u=2363062124,1291593466&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=211">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/09/16/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/Java%E7%AC%94%E8%AF%95%E6%98%93%E9%94%99%E7%82%B9%E8%AE%B0%E5%BD%95/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/09/16/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/Java%E7%AC%94%E8%AF%95%E6%98%93%E9%94%99%E7%82%B9%E8%AE%B0%E5%BD%95/%5Bobject%20Object%5D/" title="Java笔试易错点记录">
+                        Java笔试易错点记录
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E7%BB%8F%E5%85%B8%E4%BB%A3%E7%A0%81%E6%B1%87%E6%80%BB/%5Bobject%20Object%5D/" title="经典代码汇总">
+                    <img
+                        alt="经典代码汇总"
+                        src="https://img1.baidu.com/it/u=595317975,4263363691&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=700&amp;h=329">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E7%BB%8F%E5%85%B8%E4%BB%A3%E7%A0%81%E6%B1%87%E6%80%BB/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E7%BB%8F%E5%85%B8%E4%BB%A3%E7%A0%81%E6%B1%87%E6%80%BB/%5Bobject%20Object%5D/" title="经典代码汇总">
+                        经典代码汇总
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/jsencrypt.js%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0RSA%E5%8A%A0%E5%AF%86/%5Bobject%20Object%5D/" title="jsencrypt.js前端参数RSA加密和Java后端RSA解密">
+                    <img
+                        alt="jsencrypt.js前端参数RSA加密和Java后端RSA解密"
+                        src="https://img1.baidu.com/it/u=3570485044,4238122930&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/jsencrypt.js%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0RSA%E5%8A%A0%E5%AF%86/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/jsencrypt.js%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0RSA%E5%8A%A0%E5%AF%86/%5Bobject%20Object%5D/" title="jsencrypt.js前端参数RSA加密和Java后端RSA解密">
+                        jsencrypt.js前端参数RSA加密和Java后端RSA解密
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/08/22/idea/%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB(%E7%A0%B4%E8%A7%A3)%20IntelliJ%20IDEA%202019.1.1/%5Bobject%20Object%5D/" title="今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1">
+                    <img
+                        alt="今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1"
+                        src="https://img2.baidu.com/it/u=3570274128,1226415753&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=GIF?w=460&amp;h=276">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/08/22/idea/%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB(%E7%A0%B4%E8%A7%A3)%20IntelliJ%20IDEA%202019.1.1/%5Bobject%20Object%5D/">
+                            破解教程
+                        </a>
+                    
+                    <a class="title" href="/2023/08/22/idea/%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB(%E7%A0%B4%E8%A7%A3)%20IntelliJ%20IDEA%202019.1.1/%5Bobject%20Object%5D/" title="今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1">
+                        今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div>
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+        <a class="deal_link" target="_blank" href="https://gitee.com/fsvip" rel="external nofollow noopener" title="Gitee">
+            <i class="fa-brands fa-github"></i>
+        </a>
+    
+        <a class="deal_link" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=8ouHk5yGnZyVioeXxLKDg9yRnZ8" rel="external nofollow noopener" title="Mail">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    
+    <img class="footer_mini_logo" src="/img/avatar.gif"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+        <a class="deal_link" href="http://fsvip.gitee.io/my-music" rel="external nofollow" title="小于音乐馆">
+            <i class="fa-solid fa-music"></i>
+        </a>
+    
+        <a class="deal_link" target="_blank" href="https://www.bilibili.com/" rel="external nofollow noopener" title="bilibili">
+            <i class="fa-brands fa-bilibili"></i>
+        </a>
+    
+</div>
+<div id="heo-footer">
+    
+        <div class="footer-group">
+            <h3 class="footer-title">导航</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" href="/archives/" title="文章归档" rel="noopener external nofollow noreferrer">文章归档</a>
+                
+                    <a class="footer-item" href="/categories/" title="文章分类" rel="noopener external nofollow noreferrer">文章分类</a>
+                
+                    <a class="footer-item" href="/tags/" title="文章标签" rel="noopener external nofollow noreferrer">文章标签</a>
+                
+                    <a class="footer-item" href="/link/" title="友链" rel="noopener external nofollow noreferrer">友链</a>
+                
+            </div>
+        </div>
+    
+        <div class="footer-group">
+            <h3 class="footer-title">服务</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" target="_blank" href="https://51.la/" title="51la统计" rel="noopener external nofollow noreferrer noopener">51la统计</a>
+                
+                    <a class="footer-item" target="_blank" href="https://tongji.baidu.com/" title="百度统计" rel="noopener external nofollow noreferrer noopener">百度统计</a>
+                
+                    <a class="footer-item" target="_blank" href="https://ql.tianli0.top/" title="TianliCDN" rel="noopener external nofollow noreferrer noopener">TianliCDN</a>
+                
+            </div>
+        </div>
+    
+        <div class="footer-group">
+            <h3 class="footer-title">Acrylic</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" target="_blank" href="https://acrylic.zhheo.com/" title="主题官网" rel="noopener external nofollow noreferrer noopener">主题官网</a>
+                
+                    <a class="footer-item" target="_blank" href="https://github.com/hexo-theme-Acrylic/Hexo-Theme-Acrylic" title="Github" rel="noopener external nofollow noreferrer noopener">Github</a>
+                
+                    <a class="footer-item" target="_blank" href="http://hnyufushan.top/" title="Heo" rel="noopener external nofollow noreferrer noopener">Heo</a>
+                
+            </div>
+        </div>
+    
+        <div class="footer-group">
+            <h3 class="footer-title">推荐友链</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" target="_blank" href="http://hnyufushan.top/" title="Heo" rel="noopener external nofollow noreferrer noopener">Heo</a>
+                
+                    <a class="footer-item" target="_blank" href="https://akilar.top" title="Akilar" rel="noopener external nofollow noreferrer noopener">Akilar</a>
+                
+            </div>
+        </div>
+    
+    
+        <div class="footer-group youlian">
+            <div class="footer-title-group">
+                <h3 class="footer-title">友链</h3>
+                <a class="random-friends-btn" href="javascript:randomLinksList();" rel="external nofollow">
+                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                </a>
+            </div>
+            <div class="footer-links" id="friend-links-in-footer">
+            </div>
+        </div>
+    
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script>
+        if (utils.isMobile()){
+            document.querySelector('.youlian').style.display = 'none';
+        }else{
+            document.querySelector('.youlian').style.display = 'block';
+        }
+    </script>
+</div>
+<div id="footer-section">
+    <div class="footer-section-links">
+        <div class="footer-section-left">
+            <div id="footer-section-tips">
+                <div class="copyright">©2021 - 2024 By
+                    <a class="footer-section-link" href="/" rel="external nofollow">hnyufushan</a>
+                    <a class="footer-section-link" href="https://beian.miit.gov.cn/" rel="external nofollow" target="_blank"> 豫ICP备2022014539号</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-section-right">
+            <a class="footer-section-link" href="/rss/">订阅</a>
+            
+            <a class="footer-section-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+    
+<link rel="stylesheet" href="/lib/swiper.min.css">
+
+    
+<script src="/lib/swiper.min.js"></script>
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+    
+<link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css">
+
+    
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script>
+
+    
+<script src="https://cdn1.tianli0.top/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script>
+        var meting_api = "https://music.startly.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+    </script>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>const links=[{"name":"Adil","link":"https://blog.adil.com.cn"},{"name":"Akilar","link":"https://akilar.top"},{"name":"张洪Heo","link":"https://blog.zhheo.com"},{"name":"安知鱼`Blog","link":"https://anzhiy.cn"},{"name":"Leonus","link":"https://blog.leonus.cn"},{"name":"轻笑Chuckle","link":"https://www.chuckle.top"},{"name":"Ariasakaの小窝","link":"https://yisous.xyz"},{"name":"Tianli","link":"https://tianli-blog.club"},{"name":"葱苓","link":"https://blog.itciraos.cn"},{"name":"小N同学","link":"https://www.nesxc.com"},{"name":"Fomalhaut??","link":"https://www.fomal.cc"},{"name":"Vincent文朔","link":"https://blog.vincent1230.top"},{"name":"Hc's Blog","link":"https://blog.ivil.top"},{"name":"小城故事","link":"https://www.webxc.ml"},{"name":"花语阁","link":"https://www.pigax.cn"},{"name":"虫不知喔","link":"https://blog.ssycs.com"},{"name":"Ice の小站","link":"https://081113.xyz"},{"name":"Nuyoah","link":"https://262259.xyz"},{"name":"呆鱼","link":"https://daiyu-233.top"},{"name":"Mghy の Blog","link":"https://lmghy.top"},{"name":"Rainx’s Blog","link":"https://rainxblog.top"},{"name":"LyShark - 孤风洗剑","link":"https://www.lyshark.com"},{"name":"lmx0","link":"https://www.lmx0.top/"}];function travelling(){const link=links[utils.randomNum(links.length)];utils.snackbarShow('您即将前往 ⌈ '+link.name+' ⌋ , 安全性未知',false,3000);setTimeout(()=>{window.open(link.link,"_blank")},3000)};function randomLinksList(){let data='';for(let i=1;i<=3;i++){const link=links[utils.randomNum(links.length)];data+='<a class="footer-item" href="'+link.link+'" target="_blank" rel="noopener nofollow">'+link.name+'</a>'};document.getElementById('friend-links-in-footer').innerHTML=data + '<a class="footer-item" href="/links/">更多</a>'};</script>
+
+
+    
+<script src="/js/extend/console/comment.js"></script>
+
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+    <div id="local-search">
+    <div class="search-dialog">
+        <nav class="search-nav">
+            <span class="search-dialog-title">搜索</span>
+            <button class="search-close-button">
+                <i class="fas fa-times"></i>
+            </button>
+        </nav>
+        <div id="loading-database">
+            <i class="fas fa-spinner fa-pulse"></i>
+            <span>加载中</span>
+        </div>
+        <div class="search-wrap">
+            <div class="search-box">
+                <input class="search-box-input" placeholder="输入关键词快速查找" type="text" id="search-input" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off">
+            </div>
+            <div id="loading-status"></div>
+            <div id="search-results"></div>
+        </div>
+    </div>
+    <div id="search-mask"></div>
+</div>
+    
+<link rel="stylesheet" href="/css/search/local-search.css">
+
+    
+<script src="/js/extend/search/local-search.js"></script>
+
+
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["2023/09/16/git/git使用方法/[object Object]/","2023/09/16/知识积累/Java笔试易错点记录/[object Object]/","2023/08/22/知识积累/经典代码汇总/[object Object]/","2023/08/22/知识积累/jsencrypt.js前端参数RSA加密/[object Object]/","2023/08/22/idea/永久激活(破解) IntelliJ IDEA 2019.1.1/[object Object]/","2023/08/18/电脑操作/2台电脑怎么互传文件/[object Object]/","2023/08/18/必看精选/VirtualBox下Centos7配置静态IP/[object Object]/","2023/08/18/知识积累/@RequestBody和@RequestParam区别全面详细/[object Object]/","2023/08/18/知识积累/BigDecimal用法/[object Object]/","2023/08/18/知识积累/vue实现点击不同按钮展示不同内容/[object Object]/","2023/08/17/linux/Linux常用命令/[object Object]/","2023/07/24/必看精选/阿里巴巴开源 Chat2DB v1.0.11 初体验/[object Object]/","2023/07/19/知识积累/SpringBoot调用http请求的6种方式/[object Object]/","2023/07/19/知识积累/项目实战问题笔记/[object Object]/","2023/07/16/知识积累/精髓代码随手笔记/[object Object]/","2023/07/11/markdown教程/Markdown教程/[object Object]/","2022/05/06/privateInfo/个人信息/[object Object]/","2021/07/22/maven/JAVA 如何上传自己的jar包到Maven中央仓库/[object Object]/","2020/07/22/入门教程/关于/[object Object]/","2020/07/22/入门教程/即刻短文/[object Object]/","2019/10/01/数据库/数据库代码汇总/[object Object]/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>

@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpringBoot调用http请求的6种方式 | 阜山的博客</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/avatar.gif">
+<link rel="apple-touch-icon" href="/img/avatar.gif">
+<meta name="apple-mobile-web-app-title" content="阜山的博客">
+<link rel="bookmark" href="/img/avatar.gif">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/avatar.gif">
+<meta name="description" content="">
+<meta name="theme-color" content="#f7f9fe">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2021-12-12 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":false,"limit":200},"lightbox":true,"randomlinks":true,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true,"comment":{"enable":true,"twikooUrl":"https://fsvip.gitee.io/"},"localsearch":{"preload":false,"path":"/search.xml"}};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    
+        <div class="console-card-group">
+            <div class="console-card-group-left">
+                <div class="console-card" id="card-newest-comments" onclick="acrylic.hideConsole()">
+                    <div class="card-content">
+                        <div class="author-content-item-tips">互动</div>
+                        <div class="author-content-item-title">最新评论</div>
+                    </div>
+                    <div class="aside-list"></div>
+                </div>
+    
+            </div>
+            <div class="console-card-group-right">
+                <div class="console-card tags" onclick="acrylic.hideConsole()">
+                    <div class="card-content">
+                        <div class="author-content-item-tips">标签</div>
+                        <div class="author-content-item-title">寻找感兴趣的领域</div>
+                    </div>
+                    <div class="card-tag-cloud">
+                        
+                            <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 0.8rem; color: #d3d3d3">教程<sup>13</sup></a>
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 0.8rem; color: #d3d3d3">笔记<sup>11</sup></a>
+                        
+                            <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="font-size: 0.8rem; color: #d3d3d3">个人<sup>1</sup></a>
+                        
+                            <a href="/tags/%E7%A0%B4%E8%A7%A3/" style="font-size: 0.8rem; color: #d3d3d3">破解<sup>1</sup></a>
+                        
+                            <a href="/tags/Maven/" style="font-size: 0.8rem; color: #d3d3d3">Maven<sup>1</sup></a>
+                        
+                            <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 0.8rem; color: #d3d3d3">设计<sup>1</sup></a>
+                        
+                            <a href="/tags/%E7%83%AD%E9%97%A8/" style="font-size: 0.8rem; color: #d3d3d3">热门<sup>1</sup></a>
+                        
+                            <a href="/tags/%E4%BD%BF%E7%94%A8/" style="font-size: 0.8rem; color: #d3d3d3">使用<sup>1</sup></a>
+                        
+                            <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 0.8rem; color: #d3d3d3">随笔<sup>1</sup></a>
+                        
+                            <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 0.8rem; color: #d3d3d3">日常<sup>1</sup></a>
+                        
+                            <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 0.8rem; color: #d3d3d3">面试题<sup>1</sup></a>
+                        
+                            <a href="/tags/RSA%E5%8A%A0%E8%A7%A3%E5%AF%86/" style="font-size: 0.8rem; color: #d3d3d3">RSA加解密<sup>1</sup></a>
+                        
+                            <a href="/tags/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/" style="font-size: 0.8rem; color: #d3d3d3">必看精选<sup>1</sup></a>
+                        
+                    </div>
+                </div>
+                <div class="console-card history" onclick="acrylic.hideConsole()">
+                    <ul class="card-archive-list">
+    
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2023-09/')" data-pjax-state=""><span
+            class="card-archive-list-date">2023-09</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2023-08/')" data-pjax-state=""><span
+            class="card-archive-list-date">2023-08</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2023-07/')" data-pjax-state=""><span
+            class="card-archive-list-date">2023-07</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2022-05/')" data-pjax-state=""><span
+            class="card-archive-list-date">2022-05</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2021-07/')" data-pjax-state=""><span
+            class="card-archive-list-date">2021-07</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2020-07/')" data-pjax-state=""><span
+            class="card-archive-list-date">2020-07</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+     
+        <li class="card-archive-list-item"><a class="card-archive-list-link" onclick="pjax.loadUrl('/archives/2019-10/')" data-pjax-state=""><span
+            class="card-archive-list-date">2019-10</span>
+            <div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span
+                    class="card-archive-list-count-unit">篇</span></div>
+            </a>
+        </li>
+        
+</ul>
+
+                </div>
+            </div>
+        </div>
+    
+    
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+                    
+            <div class="console-btn-item" id="consoleMusic" onclick="acrylic.musicToggle()" title="音乐开关"><a class="music-switch"><i class="fas fa-music"></i></a></div>
+        
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style=""></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/avatar.gif" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+            
+            <a class="back-menu-item" href="http://fsvip.gitee.io/plog/" rel="external nofollow" title="相册博客">
+              <img class="back-menu-item-icon" src="/img/g.png" loading="lazy">
+              <span class="back-menu-item-text">
+                相册博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 友链</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/album/">
+                                <i class="fas fa-fish-fins"></i>
+                                <span> 友链相册</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/links/">
+                                <i class="fas fa-user-group"></i>
+                                <span> 友情链接</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="javascript:travelling()">
+                                <i class="fas fa-bus"></i>
+                                <span> 随机博主</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/says" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/about" rel="external nofollow">
+                    <span> 我的</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 1em; color: #d3d3d3">教程
+                        <sup>13</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1em; color: #d3d3d3">笔记
+                        <sup>11</sup>
+                    </a>
+                
+                    <a href="/tags/%E4%B8%AA%E4%BA%BA/" style="font-size: 1em; color: #d3d3d3">个人
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%A0%B4%E8%A7%A3/" style="font-size: 1em; color: #d3d3d3">破解
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/Maven/" style="font-size: 1em; color: #d3d3d3">Maven
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 1em; color: #d3d3d3">设计
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%83%AD%E9%97%A8/" style="font-size: 1em; color: #d3d3d3">热门
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E4%BD%BF%E7%94%A8/" style="font-size: 1em; color: #d3d3d3">使用
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1em; color: #d3d3d3">随笔
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 1em; color: #d3d3d3">日常
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 1em; color: #d3d3d3">面试题
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/RSA%E5%8A%A0%E8%A7%A3%E5%AF%86/" style="font-size: 1em; color: #d3d3d3">RSA加解密
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/" style="font-size: 1em; color: #d3d3d3">必看精选
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/avatar.gif" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+            
+            <a class="back-menu-item" href="http://fsvip.gitee.io/plog/" rel="external nofollow" title="相册博客">
+              <img class="back-menu-item-icon" src="/img/g.png" loading="lazy">
+              <span class="back-menu-item-text">
+                相册博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Alan</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">SpringBoot调用http请求的6种方式</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 友链</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/album/">
+                                <i class="fas fa-fish-fins"></i>
+                                <span> 友链相册</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/links/">
+                                <i class="fas fa-user-group"></i>
+                                <span> 友情链接</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="javascript:travelling()">
+                                <i class="fas fa-bus"></i>
+                                <span> 随机博主</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/says" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/about" rel="external nofollow">
+                    <span> 我的</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="search-button">
+        <a class="site-page social-icon search" title="站内搜索"
+            href="javascript:void(0);" rel="external nofollow">
+            <i class="fas fa-magnifying-glass" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F205e5985-e03a-4d6e-98b0-a48969e20d7f%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&amp;refer=http%3A%2F%2Fsafe-img.xhscdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1692352414&amp;t=0cc10d55b8a8d4eab57c2c63f382ba65" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            
+            <span class="post-meta-categories">
+                
+                    <a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/">知识积累</a>
+                
+            </span>
+            
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">教程</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">笔记</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">SpringBoot调用http请求的6种方式</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-07-19T17:52:34+08:00"></time>
+            </span>
+            
+                <span class="post-meta-date" title="更新于">
+                    <i class="post-meta-icon fa-solid fa-clock-rotate-left"></i>
+                    <time datetime="2023-08-22T13:22:36+08:00"></time>
+                </span>
+            
+            
+                <span class="post-meta-position" title="作者IP归属地为河南">
+                    <i class="fas fa-location-dot post-meta-icon"></i>
+                    <span>河南</span>
+                </span>
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">3.3k</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>16 min</span>
+                    </span>
+                
+            
+            
+            
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <div class="sticky_layout mobile-mulu">
+            
+                <div class="card-widget" id="card-toc1">
+    <div class="item-headline mulu1">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content mulu2">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%9C%BA%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">案例场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-number">1.1.</span> <span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%BF%A1%E6%81%AF"><span class="toc-number">1.2.</span> <span class="toc-text">接口信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="toc-number">1.2.1.</span> <span class="toc-text">POST请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82-%E4%B8%80"><span class="toc-number">1.2.2.</span> <span class="toc-text">GET请求(一)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82-%E4%BA%8C"><span class="toc-number">1.2.3.</span> <span class="toc-text">GET请求(二)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">Java调用http请求的6种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpURLConnection%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">HttpURLConnection调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#commons-httpclient%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-number">2.2.</span> <span class="toc-text">commons-httpclient调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8org-apache-httpcomponents%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-number">2.3.</span> <span class="toc-text">使用org.apache.httpcomponents调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8OkHttp%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-number">2.4.</span> <span class="toc-text">使用OkHttp调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8RestTemplate%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-number">2.5.</span> <span class="toc-text">使用RestTemplate调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE%E3%80%82"><span class="toc-number">2.6.</span> <span class="toc-text">结尾。</span></a></li></ol></li></ol>
+    </div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script>
+        if (utils.isMobile()){
+            document.querySelector('.mulu2').style.display = 'block';
+        }else{
+            document.querySelector('.mulu2').remove();
+        }
+    </script>
+</div>
+<style>
+    .mulu1{
+        margin-top: 1rem;
+        margin-left: 0.6rem;
+        font-weight: bold;
+    }
+    .mulu2{
+        margin-left: -1.5rem;
+        margin-top: -0.7rem;
+        opacity: 0.6;
+        filter: blur(0.6px);
+    }
+</style>
+            
+        </div>
+        <script type="text/javascript" src="/js/utils.js"></script>
+        <script>
+            if (utils.isMobile()){
+                document.querySelector('.mobile-mulu').style.display = 'block';
+            }else{
+                document.querySelector('.mobile-mulu').style.display = 'none';
+            }
+        </script>
+        <article class="post-content" id="article-container">
+            <p>场景：基于Spring Boot使用Java调用http请求的6种方式。服务端发布一个POST请求和2个GET请求。使用6种方式实现的客户端都调用服务端发布的这3个方法。可以直观感受和比对6种http请求的客户端。<br>版本：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Spring Boot <span class="number">2.6</span><span class="number">.3</span></span><br><span class="line">Spring Framework <span class="number">5.3</span><span class="number">.15</span></span><br><span class="line">Spring Cloud <span class="number">2021.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<h2 id="案例场景"><a href="#案例场景" class="headerlink" title="案例场景"></a>案例场景</h2><p>本例实现6种方式客户端调用同一个服务端的3种方法。</p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>在服务端发布一个POST请求，2个GET请求。 </p>
+<h3 id="接口信息"><a href="#接口信息" class="headerlink" title="接口信息"></a>接口信息</h3><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[访问URL]: http:<span class="comment">//127.0.0.1:19091/server/comm/f1</span></span><br><span class="line">[请求方式]: POST</span><br><span class="line">[请求参数]: JSON</span><br><span class="line">&#123;<span class="string">&quot;userName&quot;</span>:<span class="string">&quot;HangZhou20220719&quot;</span>,<span class="string">&quot;tradeName&quot;</span>:<span class="string">&quot;Vue进阶教程&quot;</span>&#125;</span><br><span class="line">[返回值]: JSON</span><br><span class="line">&#123;code=<span class="number">200</span>, message=成功&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="GET请求-一"><a href="#GET请求-一" class="headerlink" title="GET请求(一)"></a>GET请求(一)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[访问URL]: http:<span class="comment">//127.0.0.1:19091/server/comm/f2</span></span><br><span class="line">[请求方式]: GET</span><br><span class="line">[请求参数]: String</span><br><span class="line">obj=HangZhou20220719</span><br><span class="line">[返回值]: JSON</span><br><span class="line">&#123;code=<span class="number">200</span>, message=成功&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="GET请求-二"><a href="#GET请求-二" class="headerlink" title="GET请求(二)"></a>GET请求(二)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[访问URL]: http:<span class="comment">//127.0.0.1:19091/server/comm/f3/&#123;obj&#125;</span></span><br><span class="line">[请求方式]: GET</span><br><span class="line">[请求参数]: String</span><br><span class="line">obj=HangZhou20220719</span><br><span class="line">[返回值]: JSON</span><br><span class="line">&#123;code=<span class="number">200</span>, message=成功&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Java调用http请求的6种方式"><a href="#Java调用http请求的6种方式" class="headerlink" title="Java调用http请求的6种方式"></a>Java调用http请求的6种方式</h2><h3 id="HttpURLConnection调用http请求"><a href="#HttpURLConnection调用http请求" class="headerlink" title="HttpURLConnection调用http请求"></a>HttpURLConnection调用http请求</h3><ol>
+<li><p>Jar包位置<br>HttpURLConnection，全称：java.net.HttpURLConnection。<br>JDK 1.8中自带的rt.jar包中的java.net包内的类。</p>
+</li>
+<li><p>客户端代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Utils01JdkClient</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   f1();</span><br><span class="line">   f2();</span><br><span class="line">   f3();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 1.使用HttpURLConnection调用服务端的POST请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestBody</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   <span class="comment">// 1.请求URL</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">postUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f1&quot;</span>;</span><br><span class="line">   <span class="comment">// 2.请求参数JSON格式</span></span><br><span class="line">   Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">   map.put(<span class="string">&quot;userName&quot;</span>, <span class="string">&quot;HangZhou20220718&quot;</span>);</span><br><span class="line">   map.put(<span class="string">&quot;tradeName&quot;</span>, <span class="string">&quot;Vue进阶教程&quot;</span>);</span><br><span class="line">   <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(map);</span><br><span class="line">   <span class="comment">// 3.创建连接与设置连接参数</span></span><br><span class="line">   <span class="type">URL</span> <span class="variable">urlObj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(postUrl);</span><br><span class="line">   <span class="type">HttpURLConnection</span> <span class="variable">httpConn</span> <span class="operator">=</span> (HttpURLConnection) urlObj.openConnection();</span><br><span class="line">   httpConn.setRequestMethod(<span class="string">&quot;POST&quot;</span>);</span><br><span class="line">   httpConn.setRequestProperty(<span class="string">&quot;Charset&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">   <span class="comment">// POST请求且JSON数据,必须设置</span></span><br><span class="line">   httpConn.setRequestProperty(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">   <span class="comment">// 打开输出流,默认是false</span></span><br><span class="line">   httpConn.setDoOutput(<span class="literal">true</span>);</span><br><span class="line">   <span class="comment">// 打开输入流,默认是true,可省略</span></span><br><span class="line">   httpConn.setDoInput(<span class="literal">true</span>);</span><br><span class="line">   <span class="comment">// 4.从HttpURLConnection获取输出流和写数据</span></span><br><span class="line">   <span class="type">OutputStream</span> <span class="variable">oStream</span> <span class="operator">=</span> httpConn.getOutputStream();</span><br><span class="line">   oStream.write(json.getBytes());</span><br><span class="line">   oStream.flush();</span><br><span class="line">   <span class="comment">// 5.发起http调用(getInputStream触发http请求)</span></span><br><span class="line">   <span class="keyword">if</span> (httpConn.getResponseCode() != <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 6.从HttpURLConnection获取输入流和读数据</span></span><br><span class="line">   <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(httpConn.getInputStream()));</span><br><span class="line">   <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> br.readLine();</span><br><span class="line">   System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">   <span class="comment">// 7.关闭HttpURLConnection连接</span></span><br><span class="line">   httpConn.disconnect();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 2.使用HttpURLConnection调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestParam</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f2&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">para</span> <span class="operator">=</span> <span class="string">&quot;?obj=&quot;</span> + URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  getUrl = getUrl + para;</span><br><span class="line">  <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">URL</span> <span class="variable">urlObj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(getUrl);</span><br><span class="line">  <span class="type">HttpURLConnection</span> <span class="variable">httpConn</span> <span class="operator">=</span> (HttpURLConnection) urlObj.openConnection();</span><br><span class="line">  httpConn.setRequestMethod(<span class="string">&quot;GET&quot;</span>);</span><br><span class="line">  httpConn.setRequestProperty(<span class="string">&quot;Charset&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  <span class="comment">// 3.发起http调用(getInputStream触发http请求)</span></span><br><span class="line">  <span class="keyword">if</span> (httpConn.getResponseCode() != <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 4.从HttpURLConnection获取输入流和读数据</span></span><br><span class="line">  <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(</span><br><span class="line">          <span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(httpConn.getInputStream()));</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> br.readLine();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">  <span class="comment">// 5.关闭HttpURLConnection连接</span></span><br><span class="line">  httpConn.disconnect();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 3.使用HttpURLConnection调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@PathVariable</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f3</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f3/&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  obj = URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  getUrl = getUrl + obj;</span><br><span class="line">  <span class="type">URL</span> <span class="variable">urlObj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">URL</span>(getUrl);</span><br><span class="line">  <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">HttpURLConnection</span> <span class="variable">httpConn</span> <span class="operator">=</span> (HttpURLConnection) urlObj.openConnection();</span><br><span class="line">   httpConn.setRequestMethod(<span class="string">&quot;GET&quot;</span>);</span><br><span class="line">   httpConn.setRequestProperty(<span class="string">&quot;charset&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">   <span class="comment">// 3.发起http调用(getInputStream触发http请求)</span></span><br><span class="line">   <span class="keyword">if</span> (httpConn.getResponseCode() != <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">// 4.从HttpURLConnection获取输入流和读数据</span></span><br><span class="line">   <span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(</span><br><span class="line">           <span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(httpConn.getInputStream()));</span><br><span class="line">   <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> br.readLine();</span><br><span class="line">   System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">   <span class="comment">// 5.关闭HttpURLConnection连接</span></span><br><span class="line">   httpConn.disconnect();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="commons-httpclient调用http请求"><a href="#commons-httpclient调用http请求" class="headerlink" title="commons-httpclient调用http请求"></a>commons-httpclient调用http请求</h3><ol>
+<li>Jar包位置<br>commons-httpclient，比较早的Jar包，在MVNRepository仓库中，查看的最新维护时间是：2007年8月。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-httpclient<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>客户端代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Utils02CommonsHttpClient</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  f1();</span><br><span class="line">  f2();</span><br><span class="line">  f3();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 1.使用commons-httpclient调用服务端的POST请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestBody</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">postUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f1&quot;</span>;</span><br><span class="line">  <span class="comment">// 2.请求参数</span></span><br><span class="line">  Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">  map.put(<span class="string">&quot;userName&quot;</span>, <span class="string">&quot;HangZhou20220718&quot;</span>);</span><br><span class="line">  map.put(<span class="string">&quot;tradeName&quot;</span>, <span class="string">&quot;Vue进阶教程&quot;</span>);</span><br><span class="line">  <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(map);</span><br><span class="line">  <span class="comment">// 3.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">HttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpClient</span>();</span><br><span class="line">  <span class="type">PostMethod</span> <span class="variable">postMethod</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PostMethod</span>(postUrl);</span><br><span class="line">  postMethod.addRequestHeader(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">  <span class="type">RequestEntity</span> <span class="variable">entity</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringRequestEntity</span>(json, <span class="string">&quot;application/json&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  postMethod.setRequestEntity(entity);</span><br><span class="line">  <span class="comment">//解决返回值中文乱码</span></span><br><span class="line">  postMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="comment">// 4.发起请求</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">code</span> <span class="operator">=</span> httpClient.executeMethod(postMethod);</span><br><span class="line">  <span class="keyword">if</span> (code != <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 5.接收返回值</span></span><br><span class="line">  resultData = postMethod.getResponseBodyAsString();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">  <span class="comment">// 6.关闭连接</span></span><br><span class="line">  postMethod.releaseConnection();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 2.使用commons-httpclient调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestParam</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f2&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  <span class="comment">//入参有中文需要编码</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">para</span> <span class="operator">=</span> <span class="string">&quot;?obj=&quot;</span> + URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  getUrl = getUrl + para;</span><br><span class="line">  <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">HttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpClient</span>();</span><br><span class="line">  <span class="type">GetMethod</span> <span class="variable">getMethod</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GetMethod</span>(getUrl);</span><br><span class="line">  <span class="comment">//解决返回值中文乱码</span></span><br><span class="line">  getMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  <span class="comment">// 3.发起请求</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">code</span> <span class="operator">=</span> httpClient.executeMethod(getMethod);</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">if</span> (code != <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 4.接收返回值</span></span><br><span class="line">  resultData = getMethod.getResponseBodyAsString();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">  <span class="comment">// 5.关闭连接</span></span><br><span class="line">  getMethod.releaseConnection();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 3.使用commons-httpclient调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@PathVariable</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f3</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f3/&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  <span class="comment">//入参有中文需要编码</span></span><br><span class="line">  obj = URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  getUrl = getUrl + obj;</span><br><span class="line">  <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">HttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpClient</span>();</span><br><span class="line">  <span class="type">GetMethod</span> <span class="variable">getMethod</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GetMethod</span>(getUrl);</span><br><span class="line">  <span class="comment">//解决返回值中文乱码</span></span><br><span class="line">  getMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  <span class="comment">// 3.发起请求</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">code</span> <span class="operator">=</span> httpClient.executeMethod(getMethod);</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">if</span> (code != <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 4.接收返回值</span></span><br><span class="line">  resultData = getMethod.getResponseBodyAsString();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">  <span class="comment">// 5.关闭连接</span></span><br><span class="line">  getMethod.releaseConnection();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="使用org-apache-httpcomponents调用http请求"><a href="#使用org-apache-httpcomponents调用http请求" class="headerlink" title="使用org.apache.httpcomponents调用http请求"></a>使用org.apache.httpcomponents调用http请求</h3><ol>
+<li>Jar包位置<br>httpcomponents，在MVNRepository仓库中，查看的最新维护时间是：2020年10月。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.httpcomponents<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.5.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>客户端代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Utils03HttpComponentsClient</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    f1();</span><br><span class="line">    f2();</span><br><span class="line">    f3();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 1.使用org.apache.httpcomponents调用服务端的POST请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestBody</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   <span class="comment">// 1.请求URL</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">postUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f1&quot;</span>;</span><br><span class="line">   <span class="comment">// 2.请求参数</span></span><br><span class="line">   Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">   map.put(<span class="string">&quot;userName&quot;</span>, <span class="string">&quot;HangZhou20220718&quot;</span>);</span><br><span class="line">   map.put(<span class="string">&quot;tradeName&quot;</span>, <span class="string">&quot;Vue进阶教程&quot;</span>);</span><br><span class="line">   <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(map);</span><br><span class="line">   <span class="comment">// 3.创建连接与设置连接参数</span></span><br><span class="line">   <span class="type">CloseableHttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> HttpClientBuilder.create().build();</span><br><span class="line">   <span class="type">HttpPost</span> <span class="variable">httpPost</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpPost</span>(postUrl);</span><br><span class="line">   <span class="type">StringEntity</span> <span class="variable">entity</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringEntity</span>(json);</span><br><span class="line">   entity.setContentEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">   entity.setContentType(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">   httpPost.setEntity(entity);</span><br><span class="line">   <span class="comment">// 4.发起请求与接收返回值</span></span><br><span class="line">   <span class="type">HttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> httpClient.execute(httpPost);</span><br><span class="line">   <span class="keyword">if</span> (response.getStatusLine().getStatusCode() != <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">HttpEntity</span> <span class="variable">res</span> <span class="operator">=</span> response.getEntity();</span><br><span class="line">   <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> EntityUtils.toString(res);</span><br><span class="line">   System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">   <span class="comment">// 5.关闭连接</span></span><br><span class="line">   httpClient.close();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 2.使用org.apache.httpcomponents调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestParam</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f2&quot;</span>;</span><br><span class="line">   <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">   <span class="type">String</span> <span class="variable">para</span> <span class="operator">=</span> <span class="string">&quot;?obj=&quot;</span> + URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">   getUrl = getUrl + para;</span><br><span class="line">   <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">   <span class="type">CloseableHttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> HttpClientBuilder.create().build();</span><br><span class="line">   <span class="type">HttpGet</span> <span class="variable">httpGet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpGet</span>(getUrl);</span><br><span class="line">   <span class="comment">// 3.发起请求与接收返回值</span></span><br><span class="line">   <span class="type">HttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> httpClient.execute(httpGet);</span><br><span class="line">   <span class="keyword">if</span> (response.getStatusLine().getStatusCode() != <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">HttpEntity</span> <span class="variable">res</span> <span class="operator">=</span> response.getEntity();</span><br><span class="line">   <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> EntityUtils.toString(res);</span><br><span class="line">   System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">   <span class="comment">// 4.关闭连接</span></span><br><span class="line">   httpClient.close();</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 3.使用org.apache.httpcomponents调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@PathVariable</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f3</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">   <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">   <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f3/&quot;</span>;</span><br><span class="line">   <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">   <span class="comment">//入参有中文需要编码</span></span><br><span class="line">   obj = URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">   getUrl = getUrl + obj;</span><br><span class="line">   <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">   <span class="type">CloseableHttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> HttpClientBuilder.create().build();</span><br><span class="line">   <span class="type">HttpGet</span> <span class="variable">httpGet</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpGet</span>(getUrl);</span><br><span class="line">   <span class="comment">// 3.发起请求与接收返回值</span></span><br><span class="line">   <span class="type">HttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> httpClient.execute(httpGet);</span><br><span class="line">   <span class="keyword">if</span> (response.getStatusLine().getStatusCode() != <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;调用服务端异常.&quot;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">HttpEntity</span> <span class="variable">res</span> <span class="operator">=</span> response.getEntity();</span><br><span class="line">   <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> EntityUtils.toString(res);</span><br><span class="line">   System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line">   <span class="comment">// 4.关闭连接</span></span><br><span class="line">   httpClient.close();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="使用OkHttp调用http请求"><a href="#使用OkHttp调用http请求" class="headerlink" title="使用OkHttp调用http请求"></a>使用OkHttp调用http请求</h3><ol>
+<li>Jar包位置<br>com.squareup.okhttp3，本例使用版本。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.squareup.okhttp3<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>okhttp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.10.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.android<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>android<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>客户端代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Utils04OkHttpClient</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  f1();</span><br><span class="line">  f2();</span><br><span class="line">  f3();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *  1.使用okhttp调用服务端的POST请求</span></span><br><span class="line"><span class="comment">  *    服务端入参注解: <span class="doctag">@RequestBody</span></span></span><br><span class="line"><span class="comment">  * */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">postUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f1&quot;</span>;</span><br><span class="line">  <span class="comment">// 2.请求参数</span></span><br><span class="line">  Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">  map.put(<span class="string">&quot;userName&quot;</span>, <span class="string">&quot;HangZhou20220718&quot;</span>);</span><br><span class="line">  map.put(<span class="string">&quot;tradeName&quot;</span>, <span class="string">&quot;Vue进阶教程&quot;</span>);</span><br><span class="line">  <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(map);</span><br><span class="line">  <span class="comment">// 3.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">MediaType</span> <span class="variable">mediaType</span> <span class="operator">=</span> MediaType.parse(<span class="string">&quot;application/json; charset=UTF-8&quot;</span>);</span><br><span class="line">  <span class="type">RequestBody</span> <span class="variable">requestBody</span> <span class="operator">=</span> RequestBody.Companion.create(json, mediaType);</span><br><span class="line">  <span class="type">Request</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Request</span>.Builder().url(postUrl).post(requestBody).build();</span><br><span class="line">  <span class="type">OkHttpClient</span> <span class="variable">okHttpClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OkHttpClient</span>.Builder().build();</span><br><span class="line">  <span class="comment">// 4.发起请求与接收返回值</span></span><br><span class="line">  <span class="type">Response</span> <span class="variable">response</span> <span class="operator">=</span> okHttpClient.newCall(request).execute();</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> response.body().string();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *  2.使用okhttp调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  *    服务端入参注解: <span class="doctag">@RequestParam</span></span></span><br><span class="line"><span class="comment">  * */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f2&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">para</span> <span class="operator">=</span> <span class="string">&quot;?obj=&quot;</span> + URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  getUrl = getUrl + para;</span><br><span class="line">  <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">Request</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Request</span>.Builder().url(getUrl).build();</span><br><span class="line">  <span class="type">OkHttpClient</span> <span class="variable">okHttpClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OkHttpClient</span>.Builder().build();</span><br><span class="line">  <span class="comment">// 3.发起请求与接收返回值</span></span><br><span class="line">  <span class="type">Response</span> <span class="variable">response</span> <span class="operator">=</span> okHttpClient.newCall(request).execute();</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> response.body().string();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *  3.使用okhttp调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  *    服务端入参注解: <span class="doctag">@PathVariable</span></span></span><br><span class="line"><span class="comment">  * */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f3</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f3/&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  obj = URLEncoder.encode(obj, <span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">  getUrl = getUrl + obj;</span><br><span class="line">  <span class="comment">// 2.创建连接与设置连接参数</span></span><br><span class="line">  <span class="type">Request</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Request</span>.Builder().url(getUrl).build();</span><br><span class="line">  <span class="type">OkHttpClient</span> <span class="variable">okHttpClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OkHttpClient</span>.Builder().build();</span><br><span class="line">  <span class="comment">// 3.发起请求与接收返回值</span></span><br><span class="line">  <span class="type">Response</span> <span class="variable">response</span> <span class="operator">=</span> okHttpClient.newCall(request).execute();</span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> response.body().string();</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="使用RestTemplate调用http请求"><a href="#使用RestTemplate调用http请求" class="headerlink" title="使用RestTemplate调用http请求"></a>使用RestTemplate调用http请求</h3><ol>
+<li>Jar包位置<br>RestTemplate，全称org.springframework.web.client.RestTemplate。 本例使用版本。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dependency&gt;</span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.3.15<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>客户端代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Utils05RestTemplateClient</span> &#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  f1();</span><br><span class="line">  f2();</span><br><span class="line">  f3();</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 1.使用RestTemplate调用服务端的POST请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestBody</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">postUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f1&quot;</span>;</span><br><span class="line">  <span class="comment">// 2.请求参数JSON格式</span></span><br><span class="line">  Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">  map.put(<span class="string">&quot;userName&quot;</span>, <span class="string">&quot;HangZhou20220718&quot;</span>);</span><br><span class="line">  map.put(<span class="string">&quot;tradeName&quot;</span>, <span class="string">&quot;Vue进阶教程&quot;</span>);</span><br><span class="line">  <span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> JSON.toJSONString(map);</span><br><span class="line">  <span class="comment">// 3.创建RestTemplate</span></span><br><span class="line">  <span class="type">RestTemplate</span> <span class="variable">restTemplate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">  <span class="comment">// 4.设置RestTemplate参数(请求头和body)</span></span><br><span class="line">  <span class="type">HttpHeaders</span> <span class="variable">headers</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HttpHeaders</span>();</span><br><span class="line">  <span class="type">MediaType</span> <span class="variable">mediaType</span> <span class="operator">=</span> MediaType.parseMediaType(<span class="string">&quot;application/json; charset=UTF-8&quot;</span>);</span><br><span class="line">  headers.setContentType(mediaType);</span><br><span class="line">  headers.add(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">  HttpEntity&lt;String&gt; entity = <span class="keyword">new</span> <span class="title class_">HttpEntity</span>&lt;&gt;(json, headers);</span><br><span class="line">  <span class="comment">// 5.使用RestTemplate发起请求与接收返回值</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> restTemplate.postForObject(postUrl, entity, String.class);</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 2.使用RestTemplate调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@RequestParam</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f2&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">para</span> <span class="operator">=</span> <span class="string">&quot;?obj=&quot;</span> + obj;</span><br><span class="line">  getUrl = getUrl + para;</span><br><span class="line">  <span class="comment">// 2.创建RestTemplate</span></span><br><span class="line">  <span class="type">RestTemplate</span> <span class="variable">restTemplate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">  <span class="comment">// 3.使用RestTemplate发起请求与接收返回值</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> restTemplate.getForObject(getUrl, String.class);</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 3.使用RestTemplate调用服务端的GET请求</span></span><br><span class="line"><span class="comment">  * 服务端入参注解: <span class="doctag">@PathVariable</span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">f3</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">  <span class="comment">// 1.请求URL与组装请求参数</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">getUrl</span> <span class="operator">=</span> <span class="string">&quot;http://127.0.0.1:19091/server/comm/f3/&quot;</span>;</span><br><span class="line">  <span class="type">String</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="string">&quot;Vue进阶教程&quot;</span>;</span><br><span class="line">  getUrl = getUrl + obj;</span><br><span class="line">  <span class="comment">// 2.创建RestTemplate</span></span><br><span class="line">  <span class="type">RestTemplate</span> <span class="variable">restTemplate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestTemplate</span>();</span><br><span class="line">  <span class="comment">// 3.使用RestTemplate发起请求与接收返回值</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">resultData</span> <span class="operator">=</span> restTemplate.getForObject(getUrl, String.class);</span><br><span class="line">  System.out.println(<span class="string">&quot;从服务端返回结果: &quot;</span> + resultData);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table><tr><td bgcolor="#fafafa">背景色是：orange</td></tr></table></li>
+</ol>
+<h3 id="结尾。"><a href="#结尾。" class="headerlink" title="结尾。"></a>结尾。</h3>
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                    <div class="post-reward">
+    <div class="reward-button button--animated" title="赞赏作者">
+        <script>
+            if (utils.isMobile()) { const showReward=()=> {
+                const rewardMain = document.querySelector('.reward-main');
+                rewardMain.style.display = 'flex';
+                document.addEventListener('touchstart', hideReward);
+                };
+                const hideReward = () => {
+                const rewardMain = document.querySelector('.reward-main');
+                rewardMain.style.display = 'none';
+                document.removeEventListener('touchstart', hideReward);
+                };
+                const rewardButton = document.querySelector('.reward-button');
+                rewardButton.addEventListener('touchstart', event => {
+                event.stopPropagation();
+                showReward();
+                });
+                }
+          </script>
+        <i class="fas fa-hamburger"></i>
+        打赏作者
+    </div>
+    <div class="reward-main">
+        <ul class="reward-all">
+            <span class="reward-title">感谢你赐予我前进的力量</span>
+            <ul class="reward-group">
+                
+                
+            </ul>
+            <a class="reward-main-btn" href="/null">
+                <div class="reward-text">赞赏者名单</div>
+                <div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div>
+            </a>
+        </ul>
+    </div>
+</div>
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://fsvip.gitee.io/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/SpringBoot%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/[object%20Object]/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://fsvip.gitee.io/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/SpringBoot%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/[object%20Object]/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=SpringBoot调用http请求的6种方式&amp;url=https://fsvip.gitee.io/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/SpringBoot%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/[object%20Object]/&amp;pic=https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F205e5985-e03a-4d6e-98b0-a48969e20d7f%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&amp;refer=http%3A%2F%2Fsafe-img.xhscdn.com&amp;app=2002&amp;size=f9999,10000&amp;q=a80&amp;n=0&amp;g=0n&amp;fmt=auto?sec=1692352414&amp;t=0cc10d55b8a8d4eab57c2c63f382ba65"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/%E6%95%99%E7%A8%8B/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                教程
+                                <span class="tagsPageCount">13</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                笔记
+                                <span class="tagsPageCount">11</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>SpringBoot调用http请求的6种方式</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/SpringBoot%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/%5Bobject%20Object%5D/">https://fsvip.gitee.io/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/SpringBoot%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F/[object%20Object]/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">阜山的博客</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        <div class="prev-post pull-left">
+            <a href="/2023/07/24/%E5%BF%85%E7%9C%8B%E7%B2%BE%E9%80%89/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%20Chat2DB%20v1.0.11%20%E5%88%9D%E4%BD%93%E9%AA%8C/%5Bobject%20Object%5D/">
+                <div class="pagination-info">
+                    <div class="label">上一篇</div>
+                    <div class="prev_info">数据库连接工具阿里巴巴开源 Chat2DB v1.0.11 初体验</div>
+                </div>
+            </a>
+        </div>
+        <div class="next-post pull-right">
+            <a href="/2023/07/19/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98%E7%AC%94%E8%AE%B0/%5Bobject%20Object%5D/">
+                <div class="pagination-info">
+                    <div class="label">下一篇</div>
+                    <div class="next_info">项目实战问题笔记</div>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://fsvip.gitee.io/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                hnyufushan
+            </div>
+            <div class="author-info__description">这有关于<b>开发</b>、<b>技术</b>相关的问题和看法，还有对于动漫的一些<b>杂评</b>。<br>相信你可以在这里找到对你有用的知识和教程。</div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/hexo-theme-Acrylic/Hexo-Theme-Acrylic-Next" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:a@nalex.top" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%E5%9C%BA%E6%99%AF"><span class="toc-text">案例场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%BF%A1%E6%81%AF"><span class="toc-text">接口信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="toc-text">POST请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82-%E4%B8%80"><span class="toc-text">GET请求(一)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GET%E8%AF%B7%E6%B1%82-%E4%BA%8C"><span class="toc-text">GET请求(二)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82%E7%9A%846%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">Java调用http请求的6种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpURLConnection%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-text">HttpURLConnection调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#commons-httpclient%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-text">commons-httpclient调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8org-apache-httpcomponents%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-text">使用org.apache.httpcomponents调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8OkHttp%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-text">使用OkHttp调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8RestTemplate%E8%B0%83%E7%94%A8http%E8%AF%B7%E6%B1%82"><span class="toc-text">使用RestTemplate调用http请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE%E3%80%82"><span class="toc-text">结尾。</span></a></li></ol></li></ol>
+    </div>
+</div>
+        
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/09/16/git/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/%5Bobject%20Object%5D/" title="git使用方法">
+                    <img
+                        alt="git使用方法"
+                        src="https://img1.baidu.com/it/u=3008342669,3745410925&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=667&amp;h=500">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/09/16/git/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/09/16/git/git%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/%5Bobject%20Object%5D/" title="git使用方法">
+                        git使用方法
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/09/16/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/Java%E7%AC%94%E8%AF%95%E6%98%93%E9%94%99%E7%82%B9%E8%AE%B0%E5%BD%95/%5Bobject%20Object%5D/" title="Java笔试易错点记录">
+                    <img
+                        alt="Java笔试易错点记录"
+                        src="https://img0.baidu.com/it/u=2363062124,1291593466&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=211">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/09/16/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/Java%E7%AC%94%E8%AF%95%E6%98%93%E9%94%99%E7%82%B9%E8%AE%B0%E5%BD%95/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/09/16/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/Java%E7%AC%94%E8%AF%95%E6%98%93%E9%94%99%E7%82%B9%E8%AE%B0%E5%BD%95/%5Bobject%20Object%5D/" title="Java笔试易错点记录">
+                        Java笔试易错点记录
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E7%BB%8F%E5%85%B8%E4%BB%A3%E7%A0%81%E6%B1%87%E6%80%BB/%5Bobject%20Object%5D/" title="经典代码汇总">
+                    <img
+                        alt="经典代码汇总"
+                        src="https://img1.baidu.com/it/u=595317975,4263363691&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=700&amp;h=329">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E7%BB%8F%E5%85%B8%E4%BB%A3%E7%A0%81%E6%B1%87%E6%80%BB/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/%E7%BB%8F%E5%85%B8%E4%BB%A3%E7%A0%81%E6%B1%87%E6%80%BB/%5Bobject%20Object%5D/" title="经典代码汇总">
+                        经典代码汇总
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/jsencrypt.js%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0RSA%E5%8A%A0%E5%AF%86/%5Bobject%20Object%5D/" title="jsencrypt.js前端参数RSA加密和Java后端RSA解密">
+                    <img
+                        alt="jsencrypt.js前端参数RSA加密和Java后端RSA解密"
+                        src="https://img1.baidu.com/it/u=3570485044,4238122930&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=889&amp;h=500">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/jsencrypt.js%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0RSA%E5%8A%A0%E5%AF%86/%5Bobject%20Object%5D/">
+                            知识积累
+                        </a>
+                    
+                    <a class="title" href="/2023/08/22/%E7%9F%A5%E8%AF%86%E7%A7%AF%E7%B4%AF/jsencrypt.js%E5%89%8D%E7%AB%AF%E5%8F%82%E6%95%B0RSA%E5%8A%A0%E5%AF%86/%5Bobject%20Object%5D/" title="jsencrypt.js前端参数RSA加密和Java后端RSA解密">
+                        jsencrypt.js前端参数RSA加密和Java后端RSA解密
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/2023/08/22/idea/%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB(%E7%A0%B4%E8%A7%A3)%20IntelliJ%20IDEA%202019.1.1/%5Bobject%20Object%5D/" title="今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1">
+                    <img
+                        alt="今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1"
+                        src="https://img2.baidu.com/it/u=3570274128,1226415753&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=GIF?w=460&amp;h=276">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/2023/08/22/idea/%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB(%E7%A0%B4%E8%A7%A3)%20IntelliJ%20IDEA%202019.1.1/%5Bobject%20Object%5D/">
+                            破解教程
+                        </a>
+                    
+                    <a class="title" href="/2023/08/22/idea/%E6%B0%B8%E4%B9%85%E6%BF%80%E6%B4%BB(%E7%A0%B4%E8%A7%A3)%20IntelliJ%20IDEA%202019.1.1/%5Bobject%20Object%5D/" title="今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1">
+                        今天给大家分享，如何永久激活(破解) IntelliJ IDEA 2019.1.1
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div>
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+        <a class="deal_link" target="_blank" href="https://gitee.com/fsvip" rel="external nofollow noopener" title="Gitee">
+            <i class="fa-brands fa-github"></i>
+        </a>
+    
+        <a class="deal_link" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=8ouHk5yGnZyVioeXxLKDg9yRnZ8" rel="external nofollow noopener" title="Mail">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    
+    <img class="footer_mini_logo" src="/img/avatar.gif"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+        <a class="deal_link" href="http://fsvip.gitee.io/my-music" rel="external nofollow" title="小于音乐馆">
+            <i class="fa-solid fa-music"></i>
+        </a>
+    
+        <a class="deal_link" target="_blank" href="https://www.bilibili.com/" rel="external nofollow noopener" title="bilibili">
+            <i class="fa-brands fa-bilibili"></i>
+        </a>
+    
+</div>
+<div id="heo-footer">
+    
+        <div class="footer-group">
+            <h3 class="footer-title">导航</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" href="/archives/" title="文章归档" rel="noopener external nofollow noreferrer">文章归档</a>
+                
+                    <a class="footer-item" href="/categories/" title="文章分类" rel="noopener external nofollow noreferrer">文章分类</a>
+                
+                    <a class="footer-item" href="/tags/" title="文章标签" rel="noopener external nofollow noreferrer">文章标签</a>
+                
+                    <a class="footer-item" href="/link/" title="友链" rel="noopener external nofollow noreferrer">友链</a>
+                
+            </div>
+        </div>
+    
+        <div class="footer-group">
+            <h3 class="footer-title">服务</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" target="_blank" href="https://51.la/" title="51la统计" rel="noopener external nofollow noreferrer noopener">51la统计</a>
+                
+                    <a class="footer-item" target="_blank" href="https://tongji.baidu.com/" title="百度统计" rel="noopener external nofollow noreferrer noopener">百度统计</a>
+                
+                    <a class="footer-item" target="_blank" href="https://ql.tianli0.top/" title="TianliCDN" rel="noopener external nofollow noreferrer noopener">TianliCDN</a>
+                
+            </div>
+        </div>
+    
+        <div class="footer-group">
+            <h3 class="footer-title">Acrylic</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" target="_blank" href="https://acrylic.zhheo.com/" title="主题官网" rel="noopener external nofollow noreferrer noopener">主题官网</a>
+                
+                    <a class="footer-item" target="_blank" href="https://github.com/hexo-theme-Acrylic/Hexo-Theme-Acrylic" title="Github" rel="noopener external nofollow noreferrer noopener">Github</a>
+                
+                    <a class="footer-item" target="_blank" href="http://hnyufushan.top/" title="Heo" rel="noopener external nofollow noreferrer noopener">Heo</a>
+                
+            </div>
+        </div>
+    
+        <div class="footer-group">
+            <h3 class="footer-title">推荐友链</h3>
+            <div class="footer-links">
+                
+                    <a class="footer-item" target="_blank" href="http://hnyufushan.top/" title="Heo" rel="noopener external nofollow noreferrer noopener">Heo</a>
+                
+                    <a class="footer-item" target="_blank" href="https://akilar.top" title="Akilar" rel="noopener external nofollow noreferrer noopener">Akilar</a>
+                
+            </div>
+        </div>
+    
+    
+        <div class="footer-group youlian">
+            <div class="footer-title-group">
+                <h3 class="footer-title">友链</h3>
+                <a class="random-friends-btn" href="javascript:randomLinksList();" rel="external nofollow">
+                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                </a>
+            </div>
+            <div class="footer-links" id="friend-links-in-footer">
+            </div>
+        </div>
+    
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script>
+        if (utils.isMobile()){
+            document.querySelector('.youlian').style.display = 'none';
+        }else{
+            document.querySelector('.youlian').style.display = 'block';
+        }
+    </script>
+</div>
+<div id="footer-section">
+    <div class="footer-section-links">
+        <div class="footer-section-left">
+            <div id="footer-section-tips">
+                <div class="copyright">©2021 - 2024 By
+                    <a class="footer-section-link" href="/" rel="external nofollow">hnyufushan</a>
+                    <a class="footer-section-link" href="https://beian.miit.gov.cn/" rel="external nofollow" target="_blank"> 豫ICP备2022014539号</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-section-right">
+            <a class="footer-section-link" href="/rss/">订阅</a>
+            
+            <a class="footer-section-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+    
+<link rel="stylesheet" href="/lib/swiper.min.css">
+
+    
+<script src="/lib/swiper.min.js"></script>
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+    
+<link rel="stylesheet" href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css">
+
+    
+<script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script>
+
+    
+<script src="https://cdn1.tianli0.top/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+    <script>
+        var meting_api = "https://music.startly.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+    </script>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>const links=[{"name":"Adil","link":"https://blog.adil.com.cn"},{"name":"Akilar","link":"https://akilar.top"},{"name":"张洪Heo","link":"https://blog.zhheo.com"},{"name":"安知鱼`Blog","link":"https://anzhiy.cn"},{"name":"Leonus","link":"https://blog.leonus.cn"},{"name":"轻笑Chuckle","link":"https://www.chuckle.top"},{"name":"Ariasakaの小窝","link":"https://yisous.xyz"},{"name":"Tianli","link":"https://tianli-blog.club"},{"name":"葱苓","link":"https://blog.itciraos.cn"},{"name":"小N同学","link":"https://www.nesxc.com"},{"name":"Fomalhaut??","link":"https://www.fomal.cc"},{"name":"Vincent文朔","link":"https://blog.vincent1230.top"},{"name":"Hc's Blog","link":"https://blog.ivil.top"},{"name":"小城故事","link":"https://www.webxc.ml"},{"name":"花语阁","link":"https://www.pigax.cn"},{"name":"虫不知喔","link":"https://blog.ssycs.com"},{"name":"Ice の小站","link":"https://081113.xyz"},{"name":"Nuyoah","link":"https://262259.xyz"},{"name":"呆鱼","link":"https://daiyu-233.top"},{"name":"Mghy の Blog","link":"https://lmghy.top"},{"name":"Rainx’s Blog","link":"https://rainxblog.top"},{"name":"LyShark - 孤风洗剑","link":"https://www.lyshark.com"},{"name":"lmx0","link":"https://www.lmx0.top/"}];function travelling(){const link=links[utils.randomNum(links.length)];utils.snackbarShow('您即将前往 ⌈ '+link.name+' ⌋ , 安全性未知',false,3000);setTimeout(()=>{window.open(link.link,"_blank")},3000)};function randomLinksList(){let data='';for(let i=1;i<=3;i++){const link=links[utils.randomNum(links.length)];data+='<a class="footer-item" href="'+link.link+'" target="_blank" rel="noopener nofollow">'+link.name+'</a>'};document.getElementById('friend-links-in-footer').innerHTML=data + '<a class="footer-item" href="/links/">更多</a>'};</script>
+
+
+    
+<script src="/js/extend/console/comment.js"></script>
+
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+    <div id="local-search">
+    <div class="search-dialog">
+        <nav class="search-nav">
+            <span class="search-dialog-title">搜索</span>
+            <button class="search-close-button">
+                <i class="fas fa-times"></i>
+            </button>
+        </nav>
+        <div id="loading-database">
+            <i class="fas fa-spinner fa-pulse"></i>
+            <span>加载中</span>
+        </div>
+        <div class="search-wrap">
+            <div class="search-box">
+                <input class="search-box-input" placeholder="输入关键词快速查找" type="text" id="search-input" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off">
+            </div>
+            <div id="loading-status"></div>
+            <div id="search-results"></div>
+        </div>
+    </div>
+    <div id="search-mask"></div>
+</div>
+    
+<link rel="stylesheet" href="/css/search/local-search.css">
+
+    
+<script src="/js/extend/search/local-search.js"></script>
+
+
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["2023/09/16/git/git使用方法/[object Object]/","2023/09/16/知识积累/Java笔试易错点记录/[object Object]/","2023/08/22/知识积累/经典代码汇总/[object Object]/","2023/08/22/知识积累/jsencrypt.js前端参数RSA加密/[object Object]/","2023/08/22/idea/永久激活(破解) IntelliJ IDEA 2019.1.1/[object Object]/","2023/08/18/电脑操作/2台电脑怎么互传文件/[object Object]/","2023/08/18/必看精选/VirtualBox下Centos7配置静态IP/[object Object]/","2023/08/18/知识积累/@RequestBody和@RequestParam区别全面详细/[object Object]/","2023/08/18/知识积累/BigDecimal用法/[object Object]/","2023/08/18/知识积累/vue实现点击不同按钮展示不同内容/[object Object]/","2023/08/17/linux/Linux常用命令/[object Object]/","2023/07/24/必看精选/阿里巴巴开源 Chat2DB v1.0.11 初体验/[object Object]/","2023/07/19/知识积累/SpringBoot调用http请求的6种方式/[object Object]/","2023/07/19/知识积累/项目实战问题笔记/[object Object]/","2023/07/16/知识积累/精髓代码随手笔记/[object Object]/","2023/07/11/markdown教程/Markdown教程/[object Object]/","2022/05/06/privateInfo/个人信息/[object Object]/","2021/07/22/maven/JAVA 如何上传自己的jar包到Maven中央仓库/[object Object]/","2020/07/22/入门教程/关于/[object Object]/","2020/07/22/入门教程/即刻短文/[object Object]/","2019/10/01/数据库/数据库代码汇总/[object Object]/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>
